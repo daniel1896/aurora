@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+
+# Colcon/ROS2 builds & installs
+build/
+install/
+log/
+
+# VS Code & OS
+.vscode/
+.DS_Store
+
+# Binaries & archives
+*.zip
+*.run
+*.tar
+*.tar.*
+*.zst
+*.zstd
+
+# Eggs / dist
+*.egg-info/
+dist/
+*.egg
