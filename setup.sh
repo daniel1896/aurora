@@ -12,8 +12,18 @@ echo "🚀 Setting up Gaussian-LIC with submodules..."
 echo "📥 Initializing submodules..."
 git submodule update --init --recursive
 
-# Make chmod +x *.sh in setup directory
-chmod +x ./setup/*.sh
+# Check if submodules were cloned successfully
+if [ ! -d "src/gaussian_lic" ] || [ ! -d "src/livox_ros2_driver" ]; then
+    echo "❌ Submodules failed to initialize"
+    exit 1
+fi
+
+echo "✅ Submodules initialized:"
+echo "   - gaussian_lic: $(cd src/gaussian_lic && git rev-parse --abbrev-ref HEAD)"
+echo "   - livox_ros2_driver: $(cd src/livox_ros2_driver && git rev-parse --abbrev-ref HEAD)"
+
+# Make setup scripts executable
+chmod +x setup/*.sh
 
 # Install dependencies
 echo "🔧 Installing dependencies..."

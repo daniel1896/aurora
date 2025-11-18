@@ -4,9 +4,21 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$SCRIPT_DIR"
+WORKSPACE_DIR="$(dirname "$SCRIPT_DIR")"
+cd "$WORKSPACE_DIR"
 
 echo "🔨 Building workspace..."
+
+# Check if src directory exists and has submodules
+if [ ! -d "src" ]; then
+    echo "❌ src directory does not exist. Please run setup.sh first."
+    exit 1
+fi
+
+if [ ! -d "src/gaussian_lic" ] || [ ! -d "src/livox_ros2_driver" ]; then
+    echo "❌ Submodules missing in src directory."
+    exit 1
+fi
 
 # Source ROS2
 source /opt/ros/humble/setup.bash

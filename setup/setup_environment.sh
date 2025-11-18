@@ -4,11 +4,12 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+WORKSPACE_DIR="$(dirname "$SCRIPT_DIR")"
 
 echo "⚙️ Setting up environment..."
 
 # Create setup script
-cat > "$SCRIPT_DIR/setup.bash" << 'EOF'
+cat > "$WORKSPACE_DIR/setup.bash" << 'EOF'
 #!/bin/bash
 # Environment setup for Gaussian-LIC workspace
 
@@ -28,31 +29,31 @@ echo "🚀 Environment ready for Gaussian-LIC + Livox + MAVROS"
 echo "   Workspace: $GAUSSIAN_LIC_WS"
 EOF
 
-chmod +x "$SCRIPT_DIR/setup.bash"
+chmod +x "$WORKSPACE_DIR/setup.bash"
 
 # Add to bashrc if not already present
-if ! grep -q "gaussian-lic-setup/setup.bash" ~/.bashrc; then
-    echo "source $SCRIPT_DIR/setup.bash" >> ~/.bashrc
+if ! grep -q "aurora/setup.bash" ~/.bashrc; then
+    echo "source $WORKSPACE_DIR/setup.bash" >> ~/.bashrc
     echo "✅ Added workspace setup to ~/.bashrc"
 fi
 
 # Create useful aliases
-cat > "$SCRIPT_DIR/.gaussian_aliases" << EOF
+cat > "$WORKSPACE_DIR/.gaussian_aliases" << EOF
 # Gaussian-LIC aliases
-alias gaussian-build='cd $SCRIPT_DIR && colcon build --symlink-install'
-alias gaussian-clean='cd $SCRIPT_DIR && rm -rf build install log'
-alias gaussian-test='cd $SCRIPT_DIR && colcon test'
-alias gaussian-rebuild='cd $SCRIPT_DIR && rm -rf build install && colcon build --symlink-install'
+alias gaussian-build='cd $WORKSPACE_DIR && colcon build --symlink-install'
+alias gaussian-clean='cd $WORKSPACE_DIR && rm -rf build install log'
+alias gaussian-test='cd $WORKSPACE_DIR && colcon test'
+alias gaussian-rebuild='cd $WORKSPACE_DIR && rm -rf build install && colcon build --symlink-install'
 
 # Launch aliases (customize based on your launch files)
 alias gaussian-run='ros2 launch gaussian_lic gs_mapping.launch.py'
 alias livox-run='ros2 launch livox_ros2_driver livox_lidar_launch.py'
 
 # Update aliases
-alias gaussian-update='cd $SCRIPT_DIR && git pull && git submodule update --remote'
+alias gaussian-update='cd $WORKSPACE_DIR && git pull && git submodule update --remote'
 EOF
 
-echo "source $SCRIPT_DIR/.gaussian_aliases" >> ~/.bashrc
+echo "source $WORKSPACE_DIR/.gaussian_aliases" >> ~/.bashrc
 
 echo "✅ Environment setup completed"
 echo ""
