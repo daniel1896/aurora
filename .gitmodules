@@ -1,8 +1,12 @@
-[submodule "src/gaussian_lic"]
-	path = src/gaussian_lic
-	url = https://github.com/daniel1896/Gaussian-LIC.git
-	branch = ROS2
+# [submodule "src/gaussian_lic"]
+# 	path = src/gaussian_lic
+# 	url = https://github.com/daniel1896/Gaussian-LIC.git
+# 	branch = ROS2
 
 [submodule "src/livox_ros2_driver"]
 	path = src/livox_ros2_driver
 	url = https://github.com/Livox-SDK/livox_ros2_driver.git
+[submodule "src/gaussian_lic"]
+	path = src/gaussian_lic
+	url = https://github.com/daniel1896/Gaussian-LIC.git
+	branch = ROS2
