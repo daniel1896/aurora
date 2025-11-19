@@ -1,0 +1,12 @@
+# Gaussian-LIC aliases
+alias gaussian-build='cd /home/aurora/aurora && colcon build --symlink-install'
+alias gaussian-clean='cd /home/aurora/aurora && rm -rf build install log'
+alias gaussian-test='cd /home/aurora/aurora && colcon test'
+alias gaussian-rebuild='cd /home/aurora/aurora && rm -rf build install && colcon build --symlink-install'
+
+# Launch aliases (customize based on your launch files)
+alias gaussian-run='ros2 launch gaussian_lic gs_mapping.launch.py'
+alias livox-run='ros2 launch livox_ros2_driver livox_lidar_launch.py'
+
+# Update aliases
+alias gaussian-update='cd /home/aurora/aurora && git pull && git submodule update --remote'
